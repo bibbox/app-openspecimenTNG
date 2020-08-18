@@ -8,12 +8,12 @@ services:
 
   bibbox-openspecimen-web:
     image: bibbox/openspecimen:TNG
-    container_name: §§INSTANCE-openspecimen-web
+    container_name: bibbox-openspecimen-web
     restart: unless-stopped
     networks:
       - bibbox-default-network
     links:
-      - §§INSTANCE-openspecimen-db:openspecimen-db
+      - bibbox-openspecimen-db:openspecimen-db
     ports:
       - "8080:80"
     environment:
@@ -44,7 +44,7 @@ services:
 
   bibbox-openspecimen-db:
     image: mysql:5.7
-    container_name: §§INSTANCE-openspecimen-db
+    container_name: bibbox-openspecimen-db
     restart: unless-stopped
     networks:
       - bibbox-default-network
