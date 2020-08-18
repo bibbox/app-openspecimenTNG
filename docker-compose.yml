@@ -39,7 +39,7 @@ services:
       - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
       - ./data/os-data:/var/lib/openspecimen/data
       - ./data/os-plugins:/var/lib/openspecimen/plugins
-     env_file: 
+    env_file: 
       - params.env 
 
   bibbox-openspecimen-db:
