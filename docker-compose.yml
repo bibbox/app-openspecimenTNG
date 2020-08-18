@@ -15,21 +15,21 @@ services:
     links:
       - §§INSTANCE-openspecimen-db:openspecimen-db
     ports:
-      - "§§PORT1:8080"
+      - "8080:80"
     environment:
       - DATABASE_HOST=openspecimen-db
       - MYSQL_ROOT_PASSWORD=openspecimen
       - MYSQL_DATABASE=openspecimen
       - MYSQL_USER=openspecimen
       - MYSQL_PASSWORD=openspecimen
-      - TOMCAT_MANAGER_USER=§§TOMCAT_MANAGER_USER
-      - TOMCAT_MANAGER_PASSWORD=§§TOMCAT_MANAGER_PASSWORD
-      - INSTITUTE_NAME=§§INSTITUTE_NAME
-      - EMAIL_ADRESS=§§EMAIL_ADRESS
-      - FIRST_NAME=§§FIRST_NAME
-      - LAST_NAME=§§LAST_NAME
-      - LOGIN_NAME=§§LOGIN_NAME
-      - ADRESS=§§ADRESS
+      - TOMCAT_MANAGER_USER=v
+      - TOMCAT_MANAGER_PASSWORD=vendetta
+      - INSTITUTE_NAME=MUG
+      - EMAIL_ADRESS=stefan.herdy@medunigraz.at
+      - FIRST_NAME=Stefan
+      - LAST_NAME=Herdy
+      - LOGIN_NAME=herdys
+      - ADRESS=Stiftingtalstraße
     depends_on:
       - §§INSTANCE-openspecimen-db
 #      - §§INSTANCE-openspecimen-data
