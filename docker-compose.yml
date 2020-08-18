@@ -31,7 +31,7 @@ services:
       - LOGIN_NAME=herdys
       - ADRESS=Stiftingtalstraße
     depends_on:
-      - §§INSTANCE-openspecimen-db
+      - bibbox-openspecimen-db
 #      - §§INSTANCE-openspecimen-data
 #    volumes_from: 
 #      - §§INSTANCE-openspecimen-data
