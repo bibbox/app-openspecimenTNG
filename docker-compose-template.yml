@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 networks:
     bibbox-default-network:
@@ -6,8 +6,8 @@ networks:
 
 services:
 
-  §§INSTANCE-openspecimen-web:
-    image: bibbox/openspecimen:v6-3-x
+  bibbox-openspecimen-web:
+    image: bibbox/openspecimen:TNG
     container_name: §§INSTANCE-openspecimen-web
     restart: unless-stopped
     networks:
@@ -32,11 +32,15 @@ services:
       - ADRESS=§§ADRESS
     depends_on:
       - §§INSTANCE-openspecimen-db
-      - §§INSTANCE-openspecimen-data
-    volumes_from: 
-      - §§INSTANCE-openspecimen-data
+#      - §§INSTANCE-openspecimen-data
+#    volumes_from: 
+#      - §§INSTANCE-openspecimen-data
+    volumes:
+      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
+      - ./data/os-data:/var/lib/openspecimen/data
+      - ./data/os-plugins:/var/lib/openspecimen/plugins
 
-  §§INSTANCE-openspecimen-db:
+  bibbox-openspecimen-db:
     image: mysql:5.7
     container_name: §§INSTANCE-openspecimen-db
     restart: unless-stopped
@@ -47,16 +51,19 @@ services:
       - MYSQL_DATABASE=openspecimen
       - MYSQL_USER=openspecimen
       - MYSQL_PASSWORD=openspecimen
-    volumes_from: 
-      - §§INSTANCE-openspecimen-data
-    depends_on:
-      - §§INSTANCE-openspecimen-data
-
-  §§INSTANCE-openspecimen-data:
-    image: busybox
-    container_name: §§INSTANCE-openspecimen-data
     volumes:
-      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
-      - ./data/os-data:/var/lib/openspecimen/data
-      - ./data/os-plugins:/var/lib/openspecimen/plugins
       - ./data/mysql:/var/lib/mysql
+
+#   volumes_from: 
+#     - §§INSTANCE-openspecimen-data
+#    depends_on:
+#      - §§INSTANCE-openspecimen-data
+
+#  §§INSTANCE-openspecimen-data:
+#    image: busybox
+#    container_name: §§INSTANCE-openspecimen-data
+#    volumes:
+#      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
+#      - ./data/os-data:/var/lib/openspecimen/data
+#      - ./data/os-plugins:/var/lib/openspecimen/plugins
+#      - ./data/mysql:/var/lib/mysql
