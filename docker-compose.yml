@@ -9,6 +9,7 @@ services:
   bibbox-openspecimen-web:
     image: bibbox/openspecimen:TNG
     container_name: bibbox-openspecimen-web
+    user: root
     restart: unless-stopped
     networks:
       - bibbox-default-network
@@ -32,20 +33,17 @@ services:
       - ADRESS=Stiftingtalstraße
     depends_on:
       - bibbox-openspecimen-db
-#      - §§INSTANCE-openspecimen-data
-#    volumes_from: 
-#      - §§INSTANCE-openspecimen-data
     volumes:
-      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
+      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf
       - ./data/os-data:/var/lib/openspecimen/data
       - ./data/os-plugins:/var/lib/openspecimen/plugins
-#      - ./data/mysql:/var/lib/mysql
     env_file: 
-      - params.env 
+      - params.env
 
   bibbox-openspecimen-db:
     image: mysql:5.7
     container_name: bibbox-openspecimen-db
+    user: root
     restart: unless-stopped
     networks:
       - bibbox-default-network
@@ -56,15 +54,8 @@ services:
       - MYSQL_PASSWORD=openspecimen
     volumes:
       - ./data/mysql:/var/lib/mysql
-#      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
-#      - ./data/os-data:/var/lib/openspecimen/data
-#      - ./data/os-plugins:/var/lib/openspecimen/plugins
-    env_file: 
-      - params.env 
-#   volumes_from: 
-#     - §§INSTANCE-openspecimen-data
-#    depends_on:
-#      - §§INSTANCE-openspecimen-data
+    env_file:
+      - params.env
 
 #  §§INSTANCE-openspecimen-data:
 #    image: busybox
