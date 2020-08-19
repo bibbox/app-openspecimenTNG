@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 networks:
     bibbox-default-network:
@@ -7,9 +7,9 @@ networks:
 services:
 
   bibbox-openspecimen-web:
-    image: bibbox/openspecimen:TNG
-    container_name: bibbox-openspecimen-web
-    user: root
+    image: bibbox/openspecimen:v6-3-x
+    container_name: bibbox-openspecimen-web_tng
+    command: --lower_case_table_names=1
     restart: unless-stopped
     networks:
       - bibbox-default-network
@@ -26,7 +26,7 @@ services:
       - TOMCAT_MANAGER_USER=v
       - TOMCAT_MANAGER_PASSWORD=vendetta
       - INSTITUTE_NAME=MUG
-      - EMAIL_ADRESS=stefan.herdy@medunigraz.at
+      - EMAIL_ADRESS=vi
       - FIRST_NAME=Stefan
       - LAST_NAME=Herdy
       - LOGIN_NAME=herdys
@@ -34,7 +34,7 @@ services:
     depends_on:
       - bibbox-openspecimen-db
     volumes:
-      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf
+      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro
       - ./data/os-data:/var/lib/openspecimen/data
       - ./data/os-plugins:/var/lib/openspecimen/plugins
     env_file: 
@@ -42,8 +42,7 @@ services:
 
   bibbox-openspecimen-db:
     image: mysql:5.7
-    container_name: bibbox-openspecimen-db
-    user: root
+    container_name: bibbox-openspecimen-db_tng
     restart: unless-stopped
     networks:
       - bibbox-default-network
@@ -54,6 +53,7 @@ services:
       - MYSQL_PASSWORD=openspecimen
     volumes:
       - ./data/mysql:/var/lib/mysql
+      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf
     env_file:
       - params.env
 
