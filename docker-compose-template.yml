@@ -9,6 +9,7 @@ services:
   §§INSTANCE-openspecimen-web:
     image: bibbox/openspecimen:v6-3-x
     container_name: §§INSTANCE-openspecimen
+    command: --lower_case_table_names=1
     restart: unless-stopped
     networks:
       - bibbox-default-network
