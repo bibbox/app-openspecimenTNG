@@ -51,3 +51,4 @@ services:
       - MYSQL_PASSWORD=openspecimen
     volumes:
       - ./data/mysql:/var/lib/mysql
+      - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
