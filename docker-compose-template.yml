@@ -7,7 +7,7 @@ networks:
 services:
 
   §§INSTANCE-openspecimen:
-    image: bibbox/openspecimen:v6-3-x
+    image: bibbox/openspecimen:v7-0-x
     container_name: §§INSTANCE-openspecimen
     command: --lower_case_table_names=1
     restart: unless-stopped
