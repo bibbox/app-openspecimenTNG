@@ -34,6 +34,8 @@ services:
       - §§INSTANCE-openspecimen-db
     volumes: 
       - ./images/openspecimen/configs/openspecimen.cnf:/etc/mysql/conf.d/openspecimen.cnf:ro #read only
+      - ./data/os-data:/var/lib/openspecimen/data
+      - ./data/os-plugins:/var/lib/openspecimen/plugins
 
   §§INSTANCE-openspecimen-db:
     image: mysql:5.7
@@ -46,7 +48,5 @@ services:
       - MYSQL_DATABASE=openspecimen
       - MYSQL_USER=openspecimen
       - MYSQL_PASSWORD=openspecimen
-    volumes: 
-      - ./data/os-data:/var/lib/openspecimen/data
-      - ./data/os-plugins:/var/lib/openspecimen/plugins
+    volumes:
       - ./data/mysql:/var/lib/mysql
